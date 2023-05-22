@@ -1,4 +1,6 @@
 import React from 'react'
+import styles from '../../app/styles/users.module.css'
+import Link from 'next/link'
 
 export const getStaticProps = async () => {
     const res = await fetch('https://jsonplaceholder.typicode.com/users');
@@ -11,17 +13,15 @@ export const getStaticProps = async () => {
 
 export default function Users ({ allUsers }) {
   return (
-    <div>
+    <div className={styles.single}>
         <h1>All Users</h1>
         {
             allUsers.map(user=>(
-                <div key={user.id}>
-                    <a>
+                <Link href={'/users/'+user.id} key={user.id}>
                         <h3>
                             {user.name}
                         </h3>
-                    </a>
-                </div>
+                </Link>
             ))
         }
     </div>
